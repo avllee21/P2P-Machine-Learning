@@ -43,7 +43,7 @@ class Server:
                 break
 
             elif data[0:4] == b'::ml':
-                data_to_send = "[ML] ".encode('UTF-8') + data[4:]
+                data_to_send = "[ML IMG -> TXT] \n -*10 \n".encode('UTF-8') + data[4:]
                 self.broadcast(data_to_send)
 
             elif data[0:2] == b'::':

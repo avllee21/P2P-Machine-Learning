@@ -3,6 +3,7 @@ import threading
 from course import Course
 from note import Note
 from datetime import datetime
+from img2txt import img2txt
 
 class Client:
 
@@ -26,16 +27,23 @@ class Client:
                 break
             if data[0:1] == b'\x11':
                 self.peersUpdated(data[1:])
+
             elif data[0:4] == b'[ML]' and name in self.ml_node_list:
                 print("Broadcasting ML data")
-                data_to_broadcast = 'testML'
-                # TODO: send 
+                file_name = data[4:].strip()
+                img2txt_instance = img2txt()
+                data_to_broadcast = '::ml ' + img2txt_instance.convert(file_name)
+                sock.send(bytes(data_to_broadcast, 'utf-8'))
+
             elif data[0:6] == b'[sync]':
                 self.syncNote(data[6:].decode('UTF-8'))
+
             elif data[0:9] == b'[lecture]':
                 print(str(data[9:], "utf-8"))
+
             elif data[0:9] == b'[addnote]':
                 print(str(data[9:], "utf-8"))
+
             elif data[0:6] == b'[chat]':
                 print(str(data, "utf-8"))
             else:
