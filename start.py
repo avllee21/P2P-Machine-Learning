@@ -17,7 +17,7 @@ class SystemInfo:
     "adam": {"role": "student", "course": {"SWE"}},
     "harsh": {"role": "student", "course": {"SWE"}},
     "andrew": {"role": "student", "course": {"SWE"}},
-    "ml_node": {"role": "ml", "course": {"ANY"}}
+    "ml_node": {"role": "ml", "course": {"SWE"}}
     }
 
     #Port information
@@ -48,7 +48,7 @@ class NotetakingApp:
 
                 join_this_course = Course(course, SystemInfo.course_info[course])
                 student = User(username, join_this_course)
-                student.startCollab('ml', join_this_course)
+                student.startML('ml', join_this_course)
 
 def main():
     app = NotetakingApp()
