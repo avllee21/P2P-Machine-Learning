@@ -27,7 +27,9 @@ class Client:
             if data[0:1] == b'\x11':
                 self.peersUpdated(data[1:])
             elif data[0:4] == b'[ML]' and name in self.ml_node_list:
-                print('testML')
+                print("Broadcasting ML data")
+                data_to_broadcast = 'testML'
+                # TODO: send 
             elif data[0:6] == b'[sync]':
                 self.syncNote(data[6:].decode('UTF-8'))
             elif data[0:9] == b'[lecture]':
@@ -42,6 +44,7 @@ class Client:
 
     def peersUpdated(self, peerData):
         P2P.peers = str(peerData, "utf-8").split(",")[:-1]
+    
 
     def sendMsg(self, sock):
         while True:

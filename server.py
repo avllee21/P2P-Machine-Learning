@@ -42,9 +42,15 @@ class Server:
                 self.sendPeers()
                 break
 
+            elif data[0:4] == b'::ml':
+                data_to_send = "[ML] ".encode('UTF-8') + data[4:]
+                self.broadcast(data_to_send)
+
             elif data[0:2] == b'::':
                 data_to_send = "[chat] ".encode('UTF-8') + data[2:]
                 self.broadcast(data_to_send)
+
+
 
             else:
                 print(a, ":", data.decode('UTF-8'))
@@ -62,4 +68,5 @@ class Server:
     def broadcast(self, data_to_broadcast):
         for connection in self.connections:
             connection.send(bytes(data_to_broadcast))
+
 
