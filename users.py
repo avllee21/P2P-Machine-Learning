@@ -19,7 +19,7 @@ class User:
             while True:
                 try:
                     print("Trying to connect...")
-                    time.sleep(randint(1, 5))
+                    time.sleep(randint(2, 10))
                     for peer in P2P.peers:
                         try:
                             client = Client(self.name, peer, course, self.note)
