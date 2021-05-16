@@ -45,10 +45,13 @@ class NotetakingApp:
 
             elif SystemInfo.users_info[username]["role"] == "ml":
                 course = input("What course is this for? ").upper()
-
-                join_this_course = Course(course, SystemInfo.course_info[course])
-                student = User(username, join_this_course)
-                student.startML('ml', join_this_course)
+                if course not in SystemInfo.users_info[username]["course"]:
+                    print("You are not enrolled in this course.")
+                    sys.exit(0)
+                else:
+                    join_this_course = Course(course, SystemInfo.course_info[course])
+                    student = User(username, join_this_course)
+                    student.startCollab('student', join_this_course)
 
 def main():
     app = NotetakingApp()

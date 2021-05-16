@@ -37,6 +37,8 @@ class ClientML:
             data = sock.recv(1024)
             if not data:
                 break
+            if data[0:1] == b'\x11':
+                self.peersUpdated(data[1:])
             elif data[0:4] == b'[ML]':
                 print('testML')
                 # Test function
@@ -46,7 +48,8 @@ class ClientML:
                 self.note.body = self.note.body + data.decode('UTF-8') + "\n"
                 print("[note] " + str(data, "utf-8"))
 
-    
+    def peersUpdated(self, peerData):
+        P2P.peers = str(peerData, "utf-8").split(",")[:-1]    
 
 class P2P:
     peers = ['127.0.0.1']

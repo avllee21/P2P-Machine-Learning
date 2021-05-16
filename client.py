@@ -10,6 +10,7 @@ class Client:
         self.username = name
         self.note = note
         self.course = course
+        self.ml_node_list = ["ml_node"]
 
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -25,6 +26,8 @@ class Client:
                 break
             if data[0:1] == b'\x11':
                 self.peersUpdated(data[1:])
+            elif data[0:4] == b'[ML]' and name in self.ml_node_list:
+                print('testML')
             elif data[0:6] == b'[sync]':
                 self.syncNote(data[6:].decode('UTF-8'))
             elif data[0:9] == b'[lecture]':
