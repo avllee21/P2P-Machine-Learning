@@ -24,6 +24,8 @@ class Client:
         while True:
             data = sock.recv(1024)
             if not data:
+                with open('semaphore.txt', 'w') as writer:
+                    writer.write("unlocked")
                 break
             if data[0:1] == b'\x11':
                 self.peersUpdated(data[1:])

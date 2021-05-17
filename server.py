@@ -10,6 +10,7 @@ class Server:
     peers = []
 
     def __init__(self, name, course, note):
+
         self.username = name
         self.course = course
         self.note = note
