@@ -1,5 +1,6 @@
 import socket
-import threading
+#import threading
+import multiprocessing
 from course import Course
 from note import Note
 from datetime import datetime
@@ -8,26 +9,52 @@ from img2txt import img2txt
 class Client:
 
     def __init__(self, name, address, course, note):
+        print('hello! new client.')
         self.username = name
         self.note = note
         self.course = course
         self.ml_node_list = ["ml_node"]
+        self.p2paddress = '127.0.0.1'
 
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         sock.connect((address, course.course_port))
+
+        '''
         iThread = threading.Thread(target = self.sendMsg, args=(sock, ))
         iThread.daemon = True
         iThread.start()
+        for thread in threading.enumerate(): 
+            print(thread.name)
+        '''
+        iThread = multiprocessing.Process(target = self.sendMsg, args=(sock, ))
+        iThread.daemon = True
+        iThread.start()
+        
+
         print("You are now connected as one of the Notetakers in this classroom.")
 
         while True:
             data = sock.recv(1024)
             if not data:
+                print('the server disappeared!')
+                #iThread.join()
+                #print('thread gone')
+                iThread.kill()
                 break
-            if data[0:1] == b'\x11':
-                self.peersUpdated(data[1:])
 
+            if data[0:1] == b'\x11' and self.p2paddress == '127.0.0.1':
+                print(P2P.peers)
+                self.peersUpdated(data[1:])
+                self.p2paddress = P2P.peers[-1]
+                print(P2P.peers)
+
+            elif data[0:1] == b'\x11':
+                print(P2P.peers)
+                self.peersUpdated(data[1:])
+                print(P2P.peers)
+
+ 
             elif data[0:4] == b'[ML]' and name in self.ml_node_list:
                 print("Broadcasting ML data")
                 file_name = data[4:].strip()
@@ -62,7 +89,10 @@ class Client:
             elif user_input == "::exportnote()":
                 self.exportNote()
             else:
-                sock.send(bytes(user_input, 'utf-8'))
+                try:
+                    sock.send(bytes(user_input, 'utf-8'))
+                except:
+                    pass
 
     def seeNote(self):
         print("------------ Current Version of Note for " + self.course.course_name+ " ----------")
