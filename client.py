@@ -22,6 +22,7 @@ class Client:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         try:
+            print(address, course.course_port)
             sock.connect((address, course.course_port))
         except:
             return
@@ -53,6 +54,8 @@ class Client:
                 break
 
             if data[0:1] == b'\x11' and self.p2paddress == '127.0.0.1':
+                print("function1")
+                print('argument to peersUpdated:' + str(data[1:], "utf-8"))
                 print(P2P.peers)
                 self.peersUpdated(data[1:])
                 self.p2paddress = P2P.peers[-1]
@@ -60,29 +63,23 @@ class Client:
                 print(P2P.peers)
 
             elif data[0:1] == b'\x11':
+                print("function2")
+                print('argument to peersUpdated:' + str(data[1:], "utf-8"))
                 print(P2P.peers)
                 self.peersUpdated(data[1:])
                 print(P2P.peers)
             
-            elif data[0:5] == b'User:':
-                P2P.peer_with_name.add(str(data[5:].decode('UTF-8')))
-
-                #Bloadcast all the users till now
-                u = ""
-                for user in P2P.peer_with_name:
-                    u = u + user + ","
-
-                print()
-                sock.send(b"All_Users:" + bytes(u, 'utf-8'))
-
 
             elif data[0:10] == b'All_Users:':
                 print("HEre is the data")
                 print(data)
                 print("-------------")
-                temp_Data = data[10:-1].decode('UTF-8').replace('All_Users:', '')
+                temp_Data = data[10:-1].decode('UTF-8')
+                temp_set = set()
                 for name in temp_Data.split(","):
-                    P2P.peer_with_name.add(name)
+                    temp_set.add(name)
+                
+                P2P.peer_with_name= temp_set
 
  
             elif data[0:4] == b'[ML]' and name in self.ml_node_list:
