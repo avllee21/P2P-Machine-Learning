@@ -9,6 +9,8 @@
 cd C:\Users\Ishan\Desktop\Ishan\NYU\Sem 4\Software Engineering\P2P-Machine-Learning
 python start.py
 
+Can't use multiprocessing instead of threading in Python because : https://stackoverflow.com/questions/42837544/python-3-multiprocessing-eoferror-eof-when-reading-a-line
+
 
 ### TODO
 

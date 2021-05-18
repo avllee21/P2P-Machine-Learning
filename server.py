@@ -41,6 +41,12 @@ class Server:
                 c.close()
                 self.sendPeers()
                 break
+            
+            elif data[0:5] == b'User:':
+                self.broadcast(data)
+
+            elif data[0:10] == b'All_Users:':
+                self.broadcast(data)
 
             elif data[0:4] == b'::ml':
                 data_to_send = "[ML IMG -> TXT] \n -*10 \n".encode('UTF-8') + data[4:]
