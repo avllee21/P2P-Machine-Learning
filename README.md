@@ -15,6 +15,7 @@ python start.py
 #### CODE
 - (IMP) facilitator bug -> everyone tries to become the server
 - Add professor to the [PROF announcement] [Lecture upload]
+- ml node can't be facilatator
 - (LAST) Code modification:
     - ::exportnote() and ::seenotes()
     - All outputs (like [chat] [node] etc)
@@ -34,5 +35,4 @@ python start.py
 
 #### DONE
 - ML node integartion
-- ML node can't be facilatator
 

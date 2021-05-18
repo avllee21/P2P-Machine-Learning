@@ -10,7 +10,6 @@ class Server:
     peers = []
 
     def __init__(self, name, course, note):
-
         self.username = name
         self.course = course
         self.note = note
@@ -27,7 +26,7 @@ class Server:
             cThread.daemon = True
             cThread.start()
             self.connections.append(c)
-            self.peers.append(a[0])
+            self.peers.append(a[0] + ':' + str(a[1]))
             print(str(a[0]) + ':' + str(a[1]), "connected")
             self.sendPeers()
 
