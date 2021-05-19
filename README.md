@@ -45,8 +45,8 @@ Can't use multiprocessing instead of threading in Python because : https://stack
 
 
 # Basic High Level Design Implementation
-![High Level](Diagrams/HighLevelDesign.PNG)
+![High Level](Diagram/HighLevelDesign.PNG)
 
 # Use Case Implementation
-![Use Case](Diagrams/BasicUseCase.PNG)
+![Use Case](Diagram/BasicUseCase.PNG)
 
