@@ -1,15 +1,12 @@
 import socket
 import time
 import threading
-from course import Course
-from note import Note
 
 
 class Server:
-    lecture_outline = ""
 
     def __init__(self, name, course, note):
-        self.username = name
+        self.name = name
         self.course = course
         self.note = note
 
@@ -21,10 +18,10 @@ class Server:
         # bind the server socket to a specific address and a course port
         serversock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         serversock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        serversock.bind(('127.0.0.1', course.course_port))
+        serversock.bind(('127.0.0.1', self.course.course_port))
         serversock.listen(1)
 
-        print(self.username + " is now the acting server of this room!")
+        print(self.name + " is now the acting server of this room!")
         
         # start accepting connections from clientsockets
         while True:
@@ -55,7 +52,7 @@ class Server:
                 self.sendPeers()
                 break
             
-            
+
             elif data[0:5] == b'User:':
                 self.peers_with_name.add(str(clientaddress[0]) + ':' + str(clientaddress[1])+"?"+str(data[5:].decode('UTF-8')))
 
@@ -68,7 +65,7 @@ class Server:
                     connection.send(b"All_Users:" + bytes(u, 'utf-8'))
 
             elif data[0:4] == b'::ml':
-                data_to_send = "[ML IMG -> TXT] \n -*10 \n".encode('UTF-8') + data[4:]
+                data_to_send = "[ML IMG -> TXT] \n".encode('UTF-8') + data[4:]
                 self.broadcast(data_to_send)
 
             elif data[0:2] == b'::':

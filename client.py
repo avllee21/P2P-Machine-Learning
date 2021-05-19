@@ -9,7 +9,7 @@ from img2txt import img2txt
 
 class Client:
     def __init__(self, name, address, course, note):
-        self.username = name
+        self.name = name
         self.note = note
         self.course = course
         self.ml_node_list = ["ml_node"]
@@ -65,7 +65,7 @@ class Client:
                 P2P.peer_with_name= temp_set
 
             
-            elif data[0:4] == b'[ML]' and self.username in self.ml_node_list:
+            elif data[0:4] == b'[ML]' and self.name in self.ml_node_list:
                 print("Broadcasting ML data")
                 file_name = data[4:].strip()
                 img2txt_instance = img2txt()
