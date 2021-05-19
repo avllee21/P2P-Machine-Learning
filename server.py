@@ -29,16 +29,16 @@ class Server:
         # start accepting connections from clientsockets
         while True:
             clientsocket, clientaddress = serversock.accept()
-            cThread = threading.Thread(target=self.handler, args=(clientsocket, clientaddress))
-            cThread.daemon = True
-            cThread.start()
+            iThread = threading.Thread(target=self.handlepeer, args=(clientsocket, clientaddress))
+            iThread.daemon = True
+            iThread.start()
             self.connections.append(clientsocket)
             self.peers.append(clientaddress[0] + ':' + str(clientaddress[1]))
             print(str(clientaddress[0]) + ':' + str(clientaddress[1]), "has connected")
             self.sendPeers()
             
 
-    def handler(self, clientsocket, clientaddress):
+    def handlepeer(self, clientsocket, clientaddress):
         while True:
             data = clientsocket.recv(1024)
 
