@@ -7,14 +7,15 @@ from note import Note
 
 class Server:
     lecture_outline = ""
-    connections = []
-    peers = []
-    peers_with_name = set()
 
     def __init__(self, name, course, note):
         self.username = name
         self.course = course
         self.note = note
+
+        self.connections = []
+        self.peers = []
+        self.peers_with_name = set()
 
 
         # bind the server socket to a specific address and a course port
@@ -22,7 +23,6 @@ class Server:
         serversock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         serversock.bind(('127.0.0.1', course.course_port))
         serversock.listen(1)
-
 
         print(self.username + " is now the acting server of this room!")
         
@@ -32,10 +32,12 @@ class Server:
             iThread = threading.Thread(target=self.handlepeer, args=(clientsocket, clientaddress))
             iThread.daemon = True
             iThread.start()
+
             self.connections.append(clientsocket)
             self.peers.append(clientaddress[0] + ':' + str(clientaddress[1]))
-            print(str(clientaddress[0]) + ':' + str(clientaddress[1]), "has connected")
             self.sendPeers()
+
+            print(str(clientaddress[0]) + ':' + str(clientaddress[1]), "has connected")
             
 
     def handlepeer(self, clientsocket, clientaddress):
@@ -49,12 +51,10 @@ class Server:
                 # TODO: Remove the disconnected client from the self.peers_with_name set
                 self.connections.remove(clientsocket)
                 self.peers.remove(clientaddress[0] + ':' + str(clientaddress[1]))
-
-
-
                 clientsocket.close()
                 self.sendPeers()
                 break
+            
             
             elif data[0:5] == b'User:':
                 self.peers_with_name.add(str(clientaddress[0]) + ':' + str(clientaddress[1])+"?"+str(data[5:].decode('UTF-8')))

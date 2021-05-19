@@ -42,16 +42,20 @@ class Client:
                 time.sleep(2)
                 #print("thread dead --------------------------> ",self.iThread.is_alive())
                 break
-
+            
+            # server side messages during initial connection
+            # this 
             if data[0:1] == b'\x11' and self.p2paddress == '127.0.0.1':
                 self.peersUpdated(data[1:])
                 self.p2paddress = P2P.peers[-1]
                 self.port = self.p2paddress.split(":")[-1]
 
+            # server side messages during new peer connection
             elif data[0:1] == b'\x11':
                 self.peersUpdated(data[1:])
             
-
+            # server side messages during initial connection, part 2
+            # this sets P2P.peer_with_name for each client
             elif data[0:10] == b'All_Users:':
                 temp_Data = data[10:-1].decode('UTF-8')
                 temp_set = set()
