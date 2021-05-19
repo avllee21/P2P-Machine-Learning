@@ -20,7 +20,7 @@ class Server:
         sock.bind(('127.0.0.1', course.course_port))
         sock.listen(1)
 
-        print(self.username + " is now the Facilitator in this classroom...")
+        print(self.username + " is now the acting server of this room!")
 
         while True:
             c, a = sock.accept()
@@ -29,7 +29,7 @@ class Server:
             cThread.start()
             self.connections.append(c)
             self.peers.append(a[0] + ':' + str(a[1]))
-            print(str(a[0]) + ':' + str(a[1]), "connected")
+            print(str(a[0]) + ':' + str(a[1]), "has connected")
             self.sendPeers()
             
 
@@ -38,11 +38,13 @@ class Server:
             data = c.recv(1024)
 
             if not data:
-                print(str(a[0]) + ':' + str(a[1]), "disconnected")
-                self.connections.remove(c)
-                self.peers.remove(a[0])
-
+                print(str(a[0]) + ':' + str(a[1]), "has disconnected")
+                
+                # TODO: Fix the disconnection logic
                 # TODO: Remove the disconnected client from the self.peers_with_name set
+                self.connections.remove(c)
+                self.peers.remove(a[0] + ':' + str(a[1]))
+
 
 
                 c.close()
@@ -52,7 +54,7 @@ class Server:
             elif data[0:5] == b'User:':
                 self.peers_with_name.add(str(a[0]) + ':' + str(a[1])+"?"+str(data[5:].decode('UTF-8')))
 
-                #Bloadcast all the users till now
+                #Broadcast all the users till now
                 u = ""
                 for user in self.peers_with_name:
                     u = u + user + ","
