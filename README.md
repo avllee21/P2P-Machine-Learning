@@ -15,14 +15,18 @@ Can't use multiprocessing instead of threading in Python because : https://stack
 ### TODO
 
 #### CODE
-- Add professor to the [PROF announcement] [Lecture upload]
-- (LAST) Code modification:
-    - ::exportnote() and ::seenotes()
-    - All outputs (like [chat] [node] etc)
+- (IMP) Code modification:
+    - ::exportnote() and ::seenotes()  ---> [EXEPORTNOTE] 
+    - All outputs (like [chat] [note] etc)
     - function names
     - file names
-- (LAST) Voice to TXT 
-- script to start 4 terminals 
+- Integartion Voice to TXT
+
+
+
+- (LAST)Add professor to the [PROF announcement] [Lecture upload]
+
+
 
 #### Presentaion
 - ~8 Slides
@@ -37,4 +41,5 @@ Can't use multiprocessing instead of threading in Python because : https://stack
 - ML node integartion
 - (IMP) facilitator bug -> everyone tries to become the server
 - ml node can't be facilatator
+- (LAST) Voice to TXT
 
