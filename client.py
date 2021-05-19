@@ -1,16 +1,16 @@
 import socket
-#import threading
 import multiprocessing
 from course import Course
 from note import Note
 from datetime import datetime
 from img2txt import img2txt
 import sys
+import time
 
 class Client:
 
     def __init__(self, name, address, course, note):
-        print('hello! new client.')
+        print('Hello! ', name)
         self.namebroadcaseted = False
         self.username = name
         self.note = note
@@ -18,6 +18,7 @@ class Client:
         self.ml_node_list = ["ml_node"]
         self.p2paddress = '127.0.0.1'
         self.port = None
+
 
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -27,20 +28,12 @@ class Client:
         except:
             return
 
-        
-        '''
-        iThread = threading.Thread(target = self.sendMsg, args=(sock, ))
-        iThread.daemon = True
-        iThread.start()
-        for thread in threading.enumerate(): 
-            print(thread.name)
-        '''
-        iThread = multiprocessing.Process(target = self.sendMsg, args=(sock, ))
-        iThread.daemon = True
-        iThread.start()
+        self.iThread = multiprocessing.Process(target = self.sendMsg, args=(sock, ))
+        self.iThread.daemon = True
+        self.iThread.start()
         
 
-        print("You are now connected as one of the Notetakers in this classroom.")
+        print("Joined "+ self.course )
 
         sock.send(b"User:" +bytes(name, 'utf-8'))
 
@@ -48,26 +41,27 @@ class Client:
             data = sock.recv(1024)
             if not data:
                 print('the server disappeared!')
-                #iThread.join()
-                #print('thread gone')
-                iThread.terminate()
+                self.iThread.terminate()
+                self.iThread.close()
+                time.sleep(2)
+                print("thread dead --------------------------> ",self.iThread.is_alive())
                 break
 
             if data[0:1] == b'\x11' and self.p2paddress == '127.0.0.1':
-                print("function1")
-                print('argument to peersUpdated:' + str(data[1:], "utf-8"))
-                print(P2P.peers)
+                # print("function1")
+                # print('argument to peersUpdated:' + str(data[1:], "utf-8"))
+                # print(P2P.peers)
                 self.peersUpdated(data[1:])
                 self.p2paddress = P2P.peers[-1]
                 self.port = self.p2paddress.split(":")[-1]
-                print(P2P.peers)
+                # print(P2P.peers)
 
             elif data[0:1] == b'\x11':
-                print("function2")
-                print('argument to peersUpdated:' + str(data[1:], "utf-8"))
-                print(P2P.peers)
+                # print("function2")
+                # print('argument to peersUpdated:' + str(data[1:], "utf-8"))
+                # print(P2P.peers)
                 self.peersUpdated(data[1:])
-                print(P2P.peers)
+                # print(P2P.peers)
             
 
             elif data[0:10] == b'All_Users:':
@@ -124,7 +118,8 @@ class Client:
                 try:
                     sock.send(bytes(user_input, 'utf-8'))
                 except:
-                    pass
+                    print('Resend the messsage, cleaning up the nodes')
+                    break
 
     def seeNote(self):
         print("------------ Current Version of Note for " + self.course.course_name+ " ----------")

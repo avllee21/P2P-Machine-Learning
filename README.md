@@ -15,9 +15,7 @@ Can't use multiprocessing instead of threading in Python because : https://stack
 ### TODO
 
 #### CODE
-- (IMP) facilitator bug -> everyone tries to become the server
 - Add professor to the [PROF announcement] [Lecture upload]
-- ml node can't be facilatator
 - (LAST) Code modification:
     - ::exportnote() and ::seenotes()
     - All outputs (like [chat] [node] etc)
@@ -37,4 +35,6 @@ Can't use multiprocessing instead of threading in Python because : https://stack
 
 #### DONE
 - ML node integartion
+- (IMP) facilitator bug -> everyone tries to become the server
+- ml node can't be facilatator
 

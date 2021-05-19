@@ -60,9 +60,6 @@ class Server:
                 for connection in self.connections:
                     connection.send(b"All_Users:" + bytes(u, 'utf-8'))
 
-            # elif data[0:10] == b'All_Users:':
-            #     self.broadcast(data)
-
             elif data[0:4] == b'::ml':
                 data_to_send = "[ML IMG -> TXT] \n -*10 \n".encode('UTF-8') + data[4:]
                 self.broadcast(data_to_send)
