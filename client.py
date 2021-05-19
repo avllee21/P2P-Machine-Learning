@@ -72,6 +72,14 @@ class Client:
                 data_to_broadcast = '::ml ' + img2txt_instance.convert(file_name)
                 sock.send(bytes(data_to_broadcast, 'utf-8'))
 
+            elif data[0:6] == b'[save]':
+                self.note.body = data[6:].decode('UTF-8')
+                filename = self.course.course_name + "-note-" + str(datetime.now().date())
+                with open(filename, 'w') as f:
+                    f.write(self.note.body)
+                f.close()
+                print("The history has been saved to your local directory.")
+
             else:
                 self.note.body = self.note.body + data.decode('UTF-8') + "\n"
                 print("[Message:] " + str(data, "utf-8"))
@@ -90,9 +98,7 @@ class Client:
             except:
                 user_input = "NULL"
 
-            if user_input == "savehistory()":
-                self.save_history()
-            elif user_input!="NULL":
+            if user_input!="NULL":
                 try:
                     sock.send(bytes(user_input, 'utf-8'))
                 except:

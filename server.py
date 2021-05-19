@@ -73,6 +73,10 @@ class Server:
                 print("Sending ML data from server")
                 self.send_data(data)
 
+            elif data[0:13] == b'savehistory()':
+                data_to_send = "[save]" + self.note.body
+                c.send(bytes(data_to_send))
+
             else:
                 print(clientaddress, ":", data.decode('UTF-8'))
                 self.note.body = self.note.body + data.decode('UTF-8') + "\n"
@@ -91,5 +95,3 @@ class Server:
     def send_data(self, data_to_send):
         for connection in self.connections:
             connection.send(bytes(data_to_send))
-
-
