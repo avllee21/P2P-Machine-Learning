@@ -1,16 +1,14 @@
 import socket
 import multiprocessing
+import sys
+import time
 from course import Course
 from note import Note
 from datetime import datetime
 from img2txt import img2txt
-import sys
-import time
 
 class Client:
     def __init__(self, name, address, course, note):
-        print('Hello! ', name)
-        self.namebroadcaseted = False
         self.username = name
         self.note = note
         self.course = course
@@ -31,7 +29,7 @@ class Client:
         self.iThread.start()
         
 
-        print("Joined " + self.course.course_name)
+        print("You have joined " + self.course.course_name + "'s room. Welcome!")
 
         sock.send(b"User:" +bytes(name, 'utf-8'))
 
@@ -97,9 +95,8 @@ class Client:
                 user_input = input("")
             except:
                 user_input = "NULL"
-            if user_input == "::seenote()":
-                self.seeNote()
-            elif user_input == "::exportnote()":
+
+            if user_input == "::exportnote()":
                 self.exportNote()
             elif user_input!="NULL":
                 try:
@@ -107,11 +104,6 @@ class Client:
                 except:
                     print('Resend the messsage, cleaning up the nodes')
                     break
-
-    def seeNote(self):
-        print("------------ Current Version of Note for " + self.course.course_name+ " ----------")
-        print(self.note.body)
-        print("-------------------- End of Note ---------------------")
 
     def exportNote(self):
         fname = self.course.course_name + "-note-" + str(datetime.now().date())

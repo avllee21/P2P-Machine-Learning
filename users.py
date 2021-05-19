@@ -1,8 +1,7 @@
 import sys
+import time
 from server import Server
 from client import Client, P2P
-from course import Course
-import time
 from random import randint
 from note import Note
 
@@ -20,7 +19,7 @@ class User:
             client = None
             while True:
                 try:
-                    print("Connecting to the server ...")
+                    print("Starting collaboration!")
                     time.sleep(randint(1, 5))
                     
                     peer = '127.0.0.1'
@@ -36,7 +35,6 @@ class User:
 
 
                     if self.name not in self.ml_node_list:
-
                         try:
                             if len(P2P.peers)==1:
                                 server = Server(self.name, course, self.note)
@@ -50,3 +48,5 @@ class User:
                 # Exit if end-user interrupts
                 except KeyboardInterrupt:
                     sys.exit(0)
+
+# TODO: Add professor.py file with the professor class in it

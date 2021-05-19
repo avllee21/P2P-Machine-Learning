@@ -5,11 +5,12 @@ https://github.com/StorjOld/pyp2p/blob/master/pyp2p/sock.py
 https://docs.python.org/3/library/socket.html
 
 '''
-
+import sys
 from users import User
 from course import Course
-import sys
 
+
+# TODO: Add more system info
 class SystemInfo:
     users_info = {
     "ishan": {"role": "student", "course": {"SWE"}},
@@ -25,36 +26,36 @@ class SystemInfo:
     "SWE": 5000
     }
 
-class NotetakingApp:
+class Application:
     def login(self):
-        username = input("Enter name of the node / user ? ")
-        if username.lower() not in SystemInfo.users_info:
-            print("You are not part of the system. Contact the admin.")
+        name = input("What is your name? ")
+        if name.strip().lower() not in SystemInfo.users_info:
+            print("Your name is not in the system. Please try again.")
             sys.exit(0)
 
         else:
-            if SystemInfo.users_info[username]["role"] == "student":
+            if SystemInfo.users_info[name]["role"] == "student":
                 course = input("What course is this for? ").upper()
-                if course not in SystemInfo.users_info[username]["course"]:
-                    print("You are not enrolled in this course.")
+                if course not in SystemInfo.users_info[name]["course"]:
+                    print("You are not enrolled in this course. Goodbye")
                     sys.exit(0)
                 else:
-                    join_this_course = Course(course, SystemInfo.course_info[course])
-                    student = User(username, join_this_course)
-                    student.startCollab('student', join_this_course)
+                    course_to_join = Course(course, SystemInfo.course_info[course])
+                    student = User(name, course_to_join)
+                    student.startCollab('student', course_to_join)
 
-            elif SystemInfo.users_info[username]["role"] == "ml":
+            elif SystemInfo.users_info[name]["role"] == "ml":
                 course = input("What course is this for? ").upper()
-                if course not in SystemInfo.users_info[username]["course"]:
-                    print("You are not enrolled in this course.")
+                if course not in SystemInfo.users_info[name]["course"]:
+                    print("You are not enrolled in this course. Goodbye")
                     sys.exit(0)
                 else:
-                    join_this_course = Course(course, SystemInfo.course_info[course])
-                    student = User(username, join_this_course)
-                    student.startCollab('student', join_this_course)
+                    course_to_join = Course(course, SystemInfo.course_info[course])
+                    student = User(name, course_to_join)
+                    student.startCollab('student', course_to_join)
 
 def main():
-    app = NotetakingApp()
+    app = Application()
     app.login()
 
 if __name__ == '__main__':
