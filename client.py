@@ -22,9 +22,7 @@ class Client:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         try:
-            #print(address, course.course_port)
             sock.connect((address, course.course_port))
-            #print("Socket conncted")
         except:
             return
 
@@ -48,26 +46,15 @@ class Client:
                 break
 
             if data[0:1] == b'\x11' and self.p2paddress == '127.0.0.1':
-                # print("function1")
-                # print('argument to peersUpdated:' + str(data[1:], "utf-8"))
-                # print(P2P.peers)
                 self.peersUpdated(data[1:])
                 self.p2paddress = P2P.peers[-1]
                 self.port = self.p2paddress.split(":")[-1]
-                # print(P2P.peers)
 
             elif data[0:1] == b'\x11':
-                # print("function2")
-                # print('argument to peersUpdated:' + str(data[1:], "utf-8"))
-                # print(P2P.peers)
                 self.peersUpdated(data[1:])
-                # print(P2P.peers)
             
 
             elif data[0:10] == b'All_Users:':
-                # print("HEre is the data")
-                # print(data)
-                # print("-------------")
                 temp_Data = data[10:-1].decode('UTF-8')
                 temp_set = set()
                 for name in temp_Data.split(","):
@@ -75,8 +62,8 @@ class Client:
                 
                 P2P.peer_with_name= temp_set
 
- 
-            elif data[0:4] == b'[ML]' and name in self.ml_node_list:
+            
+            elif data[0:4] == b'[ML]' and self.username in self.ml_node_list:
                 print("Broadcasting ML data")
                 file_name = data[4:].strip()
                 img2txt_instance = img2txt()

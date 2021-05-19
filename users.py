@@ -37,17 +37,11 @@ class User:
 
                     if self.name not in self.ml_node_list:
 
-                        # print(P2P.peer_with_name)
-                        # if(len(P2P.peers)!=1):
-                        #     print(self.name)    
-                        #     print(sorted(P2P.peer_with_name, key = lambda x : x.split("?")[1])[0].split("?")[1])
                         try:
                             if len(P2P.peers)==1:
-                                # print('p2p.peers is 1')
                                 server = Server(self.name, course, self.note)
                             
                             elif self.name == sorted(P2P.peer_with_name, key = lambda x : x.split("?")[1])[0].split("?")[1]:
-                                # print('sorting function has been called')
                                 server = Server(self.name, course, self.note)
                         
                         except KeyboardInterrupt:

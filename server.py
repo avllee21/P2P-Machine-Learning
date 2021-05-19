@@ -68,6 +68,10 @@ class Server:
                 data_to_send = "[chat] ".encode('UTF-8') + data[2:]
                 self.broadcast(data_to_send)
 
+            elif data[0:4] == b'[ML]':
+                print("Broadcasting ML data from server")
+                self.broadcast(data)
+
 
 
             else:
