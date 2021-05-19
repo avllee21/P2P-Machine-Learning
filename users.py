@@ -24,7 +24,7 @@ class User:
                     time.sleep(randint(1, 5))
                     
                     peer = '127.0.0.1'
-                    print(P2P.peers, str(list(P2P.peer_with_name)))
+                    #print(P2P.peers, str(list(P2P.peer_with_name)))
                     try:
                         client = Client(self.name, peer, course, self.note)
 
@@ -37,10 +37,10 @@ class User:
 
                     if self.name not in self.ml_node_list:
 
-                        print(P2P.peer_with_name)
-                        if(len(P2P.peers)!=1):
-                            print(self.name)    
-                            print(sorted(P2P.peer_with_name, key = lambda x : x.split("?")[1])[0].split("?")[1])
+                        # print(P2P.peer_with_name)
+                        # if(len(P2P.peers)!=1):
+                        #     print(self.name)    
+                        #     print(sorted(P2P.peer_with_name, key = lambda x : x.split("?")[1])[0].split("?")[1])
                         try:
                             if len(P2P.peers)==1:
                                 # print('p2p.peers is 1')

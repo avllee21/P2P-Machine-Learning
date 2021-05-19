@@ -8,7 +8,6 @@ import sys
 import time
 
 class Client:
-
     def __init__(self, name, address, course, note):
         print('Hello! ', name)
         self.namebroadcaseted = False
@@ -23,8 +22,9 @@ class Client:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         try:
-            print(address, course.course_port)
+            #print(address, course.course_port)
             sock.connect((address, course.course_port))
+            #print("Socket conncted")
         except:
             return
 
@@ -33,18 +33,18 @@ class Client:
         self.iThread.start()
         
 
-        print("Joined "+ self.course )
+        print("Joined " + self.course.course_name)
 
         sock.send(b"User:" +bytes(name, 'utf-8'))
 
         while True:
             data = sock.recv(1024)
             if not data:
-                print('the server disappeared!')
+                #print('the server disappeared!')
                 self.iThread.terminate()
                 self.iThread.close()
                 time.sleep(2)
-                print("thread dead --------------------------> ",self.iThread.is_alive())
+                #print("thread dead --------------------------> ",self.iThread.is_alive())
                 break
 
             if data[0:1] == b'\x11' and self.p2paddress == '127.0.0.1':
@@ -65,9 +65,9 @@ class Client:
             
 
             elif data[0:10] == b'All_Users:':
-                print("HEre is the data")
-                print(data)
-                print("-------------")
+                # print("HEre is the data")
+                # print(data)
+                # print("-------------")
                 temp_Data = data[10:-1].decode('UTF-8')
                 temp_set = set()
                 for name in temp_Data.split(","):
