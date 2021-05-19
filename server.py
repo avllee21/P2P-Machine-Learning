@@ -3,6 +3,7 @@ import time
 import threading
 
 
+
 class Server:
 
     def __init__(self, name, course, note):
@@ -11,7 +12,7 @@ class Server:
         self.note = note
 
         self.connections = []
-        self.peers = []
+        self.peer_addresses = []
         self.peers_with_name = set()
 
 
@@ -31,8 +32,8 @@ class Server:
             iThread.start()
 
             self.connections.append(clientsocket)
-            self.peers.append(clientaddress[0] + ':' + str(clientaddress[1]))
-            self.sendPeers()
+            self.peer_addresses.append(clientaddress[0] + ':' + str(clientaddress[1]))
+            self.send_peer_addresses()
 
             print(str(clientaddress[0]) + ':' + str(clientaddress[1]), "has connected")
             
@@ -47,11 +48,10 @@ class Server:
                 # TODO: Fix the disconnection logic
                 # TODO: Remove the disconnected client from the self.peers_with_name set
                 self.connections.remove(clientsocket)
-                self.peers.remove(clientaddress[0] + ':' + str(clientaddress[1]))
+                self.peer_addresses.remove(clientaddress[0] + ':' + str(clientaddress[1]))
                 clientsocket.close()
-                self.sendPeers()
+                self.send_peer_addresses()
                 break
-            
 
             elif data[0:5] == b'User:':
                 self.peers_with_name.add(str(clientaddress[0]) + ':' + str(clientaddress[1])+"?"+str(data[5:].decode('UTF-8')))
@@ -66,34 +66,30 @@ class Server:
 
             elif data[0:4] == b'::ml':
                 data_to_send = "[ML IMG -> TXT] \n".encode('UTF-8') + data[4:]
-                self.broadcast(data_to_send)
+                self.send_data(data_to_send)
 
-            elif data[0:2] == b'::':
-                data_to_send = "[chat] ".encode('UTF-8') + data[2:]
-                self.broadcast(data_to_send)
 
             elif data[0:4] == b'[ML]':
-                print("Broadcasting ML data from server")
-                self.broadcast(data)
-
-
+                print("Sending ML data from server")
+                self.send_data(data)
 
             else:
                 print(clientaddress, ":", data.decode('UTF-8'))
                 self.note.body = self.note.body + data.decode('UTF-8') + "\n"
-                self.broadcast(data)
+                self.send_data(data)
 
-    def sendPeers(self):
+
+    def send_peer_addresses(self):
         p = ""
-        for peer in self.peers:
+        for peer in self.peer_addresses:
             p = p + peer + ","
 
         for connection in self.connections:
             connection.send(b'\x11' + bytes(p, 'utf-8'))
 
 
-    def broadcast(self, data_to_broadcast):
+    def send_data(self, data_to_send):
         for connection in self.connections:
-            connection.send(bytes(data_to_broadcast))
+            connection.send(bytes(data_to_send))
 
 

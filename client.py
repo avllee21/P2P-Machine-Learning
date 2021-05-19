@@ -72,20 +72,10 @@ class Client:
                 data_to_broadcast = '::ml ' + img2txt_instance.convert(file_name)
                 sock.send(bytes(data_to_broadcast, 'utf-8'))
 
-            elif data[0:6] == b'[sync]':
-                self.syncNote(data[6:].decode('UTF-8'))
-
-            elif data[0:9] == b'[lecture]':
-                print(str(data[9:], "utf-8"))
-
-            elif data[0:9] == b'[addnote]':
-                print(str(data[9:], "utf-8"))
-
-            elif data[0:6] == b'[chat]':
-                print(str(data, "utf-8"))
             else:
                 self.note.body = self.note.body + data.decode('UTF-8') + "\n"
                 print("[note] " + str(data, "utf-8"))
+
 
     def peersUpdated(self, peerData):
         P2P.peers = str(peerData, "utf-8").split(",")[:-1]
@@ -100,8 +90,8 @@ class Client:
             except:
                 user_input = "NULL"
 
-            if user_input == "::exportnote()":
-                self.exportNote()
+            if user_input == "savehistory()":
+                self.save_history()
             elif user_input!="NULL":
                 try:
                     sock.send(bytes(user_input, 'utf-8'))
@@ -109,16 +99,13 @@ class Client:
                     print('Resend the messsage, cleaning up the nodes')
                     break
 
-    def exportNote(self):
-        fname = self.course.course_name + "-note-" + str(datetime.now().date())
-        with open(fname, 'w') as f:
+    def save_history(self):
+        filename = self.course.course_name + "-note-" + str(datetime.now().date())
+        with open(filename, 'w') as f:
             f.write(self.note.body)
         f.close()
-        print("The note is exported to your local directory...")
+        print("The history has been saved to your local directory.")
 
-    def syncNote(self, updated_note):
-        self.note.body = updated_note
-        print("You now have the latest version of note from the server...")
 
 class P2P:
     peers = ['127.0.0.1']
