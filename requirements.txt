@@ -1,3 +1,6 @@
 pyp2p
 umsgpack
 pytesseract
+ffmpeg
+pydub
+SpeechRecognition
