@@ -43,3 +43,10 @@ Can't use multiprocessing instead of threading in Python because : https://stack
 - ml node can't be facilatator
 - (LAST) Voice to TXT
 
+
+# Basic High Level Design Implementation
+![High Level](Diagram/HighLevelDesign.PNG)
+
+# Use Case Implementation
+![Use Case](Diagram/BasicUseCase.PNG)
+
