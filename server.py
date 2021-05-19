@@ -22,7 +22,7 @@ class Server:
         serversock.bind(('127.0.0.1', self.course.course_port))
         serversock.listen(1)
 
-        print(self.name + " is now the acting server of this room!")
+        print(self.name + " is now the chat node of this room.")
         
         # start accepting connections from clientsockets
         while True:

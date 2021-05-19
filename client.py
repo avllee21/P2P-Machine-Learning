@@ -74,7 +74,7 @@ class Client:
 
             else:
                 self.note.body = self.note.body + data.decode('UTF-8') + "\n"
-                print("[note] " + str(data, "utf-8"))
+                print("[Message:] " + str(data, "utf-8"))
 
 
     def peersUpdated(self, peerData):
