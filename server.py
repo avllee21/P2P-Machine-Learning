@@ -75,7 +75,7 @@ class Server:
 
             elif data[0:13] == b'savehistory()':
                 data_to_send = "[save]" + self.note.body
-                c.send(bytes(data_to_send))
+                clientsocket.send(bytes(data_to_send.encode('UTF-8')))
 
             else:
                 print(clientaddress, ":", data.decode('UTF-8'))

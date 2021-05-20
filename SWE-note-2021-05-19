@@ -1,0 +1,36 @@
+hello there
+rograms (i.e. Algorithms)
+
+Later courses (i.e. electives) teach you about particular domains
+
+This course teaches you how to use those skills in a professional environment to work in
+a team to build something that you are relatively confident won't fail and is worth other
+people spending money on it
+
+e Ata high level, SE is concerned with the steps of the development process:
+
+°
+
+00000
+
+Requirements
+
+Design / Specification
+Programming / Construction / Implementation
+Testing (Verification and Validation)
+Production and Release
+
+Maintenance and Updates
+
+«© Why is SE different?
+
+0000
+
+Software is malleable / changeable
+
+Requirements often change DURING development
+
+Requirements often change AFTER development
+
+Optimism from programming teams (“Of course we can add that feature!”)
+
