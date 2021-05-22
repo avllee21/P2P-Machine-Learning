@@ -6,6 +6,7 @@ https://docs.python.org/3/library/socket.html
 
 '''
 import sys
+from node_details import nodeDetails 
 from users import User
 
 class Course:
@@ -13,23 +14,6 @@ class Course:
         self.course_name =  course
         self.course_port = course_port
 
-# Node details for the application
-class nodeDetails:
-    # Add new users with their roles and corresponding course here
-    users_info = {
-        "ishan": {"role": "student", "course": {"SWE"}},
-        "richa": {"role": "student", "course": {"SWE"}},
-        "adam": {"role": "student", "course": {"SWE"}},
-        "harsh": {"role": "student", "course": {"SWE"}},
-        "andrew": {"role": "student", "course": {"SWE"}},
-        "ml_node": {"role": "ml", "course": {"SWE"}}
-    }
-
-    # Port information for the course
-    # Add courses and specify non classing port numbers to be used
-    course_info = {
-        "SWE": 5000
-    }
 
 
 def main():

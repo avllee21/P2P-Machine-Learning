@@ -22,8 +22,8 @@ First node (which automatically becomes the server)
 ```
 cd <location of root of repo>
 python start.py
-What is your name? ishan
-What course is this for? SWE
+Enter Name of the node :ishan
+Enter Chat room name :SWE
 Starting collaboration!
 ishan is now the chat node of this room.
 ```
@@ -32,8 +32,8 @@ Person joining chat room
 ```
 cd <location of root of repo>
 python start.py
-What is your name? richa
-What course is this for? swe
+Enter Name of the node :richa
+Enter Chat room name :SWE
 Starting collaboration!
 You have joined SWE's room. Welcome!
 ```
@@ -42,8 +42,8 @@ Another person joining chat room
 ```
 cd <location of root of repo>
 python start.py
-What is your name? andrew
-What course is this for? swe
+Enter Name of the node :andrew
+Enter Chat room name :SWE
 Starting collaboration!
 You have joined SWE's room. Welcome!
 ```
@@ -52,8 +52,8 @@ Another person joining chat room
 ```
 cd <location of root of repo>
 python start.py
-What is your name? harsh
-What course is this for? swe
+Enter Name of the node :harsh
+Enter Chat room name :SWE
 Starting collaboration!
 You have joined SWE's room. Welcome!
 ```
@@ -67,15 +67,15 @@ Adding ML node (this is needed to utilize ML functions)
 ```
 cd <location of root of repo>
 python start.py
-What is your name? ml_node
-What course is this for? swe
+Enter Name of the node :ml_node
+Enter Chat room name :SWE
 Starting collaboration!
 You have joined SWE's room. Welcome!
 ```
 
 Now anyone in the chat can write:
 ```
-[ML] test.png
+[ML] swe_notes.png
 ```
 After this ml_node will broadcast IMG->TXT data with the help of main chat node to all the nodes
 
