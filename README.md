@@ -24,8 +24,8 @@ Starting collaboration!
 ishan is now the chat node of this room.
 ```
 
+Person joining chat room 
 ```
-Additional node (which automatically becomes the server)
 cd <location of root of repo>
 python start.py
 What is your name? richa
@@ -34,7 +34,7 @@ Starting collaboration!
 You have joined SWE's room. Welcome!
 ```
 
-Additional node (which automatically becomes the server)
+Another person joining chat room 
 ```
 cd <location of root of repo>
 python start.py
@@ -44,7 +44,7 @@ Starting collaboration!
 You have joined SWE's room. Welcome!
 ```
 
-Additional node (which automatically becomes the server)
+Another person joining chat room 
 ```
 cd <location of root of repo>
 python start.py
@@ -56,7 +56,7 @@ You have joined SWE's room. Welcome!
 
 ### Example for ML functions
 
-Adding ML node (which automatically becomes the server)
+Adding ML node (this is needed to utilize ML functions)
 ```
 cd <location of root of repo>
 python start.py
@@ -79,13 +79,9 @@ savehistory()
 This will save history of the chat for that node in their local dir with date and time
 
 
-Can't use multiprocessing instead of threading in Python because : https://stackoverflow.com/questions/42837544/python-3-multiprocessing-eoferror-eof-when-reading-a-line
-
-
 ### Future Work
 
 #### Code
-
 - Integartion Voice to TXT
 - Add authentication - professor to the [PROF announcement] [Lecture upload]
 
@@ -93,12 +89,15 @@ Can't use multiprocessing instead of threading in Python because : https://stack
 - ML node integartion
 - (IMP) Facilitator bug -> everyone tries to become the server
 - ML node can't be facilatator
+- Fixed EOF bug caused due to multiprocessing- https://stackoverflow.com/questions/42837544/python-3-multiprocessing-eoferror-eof-when-reading-a-line
 
 ### Diagrams
 
 #### Basic High Level Design Implementation
+
 ![High Level](Diagram/HighLevelDesign.PNG)
 
 #### Use Case Implementation
+
 ![Use Case](Diagram/BasicUseCase.PNG)
 
