@@ -110,21 +110,5 @@ ___
 - Integartion Voice to TXT
 - Add authentication - professor to the [PROF announcement] [Lecture upload]
 
-#### DONE
-- ML node integartion
-- (IMP) Facilitator bug -> everyone tries to become the server
-- ML node can't be facilatator
-- Fixed EOF bug caused due to multiprocessing- https://stackoverflow.com/questions/42837544/python-3-multiprocessing-eoferror-eof-when-reading-a-line
-
-___
-
-### Diagrams
-
-#### Basic High Level Design Implementation
-
-![High Level](Diagram/HighLevelDesign.PNG)
-
-#### Use Case Implementation
-
-![Use Case](Diagram/BasicUseCase.PNG)
-
+#### Kanban Board
+![alt text](https://github.com/gskishan004/P2P-Machine-Learning/blob/main/Diagram/kanban.JPG)
