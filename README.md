@@ -13,55 +13,69 @@ The system consists of multiple clusters of nodes (Student, Professor, ML, Chat)
 - #### For installtion of other dependencies 
     - pip install -r requirements.txt
 
-#### Example for everyone joining the room
+### Example for everyone joining the room
 First node (which automatically becomes the server)
-- cd <location of root of repo>
-- python start.py
-> What is your name? ishan
-> What course is this for? SWE
-> Starting collaboration!
-> ishan is now the chat node of this room.
+```
+cd <location of root of repo>
+python start.py
+What is your name? ishan
+What course is this for? SWE
+Starting collaboration!
+ishan is now the chat node of this room.
+```
+
+```
+Additional node (which automatically becomes the server)
+cd <location of root of repo>
+python start.py
+What is your name? richa
+What course is this for? swe
+Starting collaboration!
+You have joined SWE's room. Welcome!
+```
 
 Additional node (which automatically becomes the server)
-- cd <location of root of repo>
-- python start.py
->What is your name? richa
->What course is this for? swe
->Starting collaboration!
->You have joined SWE's room. Welcome!
+```
+cd <location of root of repo>
+python start.py
+What is your name? andrew
+What course is this for? swe
+Starting collaboration!
+You have joined SWE's room. Welcome!
+```
 
 Additional node (which automatically becomes the server)
-- cd <location of root of repo>
-- python start.py
->What is your name? andrew
->What course is this for? swe
->Starting collaboration!
->You have joined SWE's room. Welcome!
+```
+cd <location of root of repo>
+python start.py
+What is your name? harsh
+What course is this for? swe
+Starting collaboration!
+You have joined SWE's room. Welcome!
+```
 
-Additional node (which automatically becomes the server)
-- cd <location of root of repo>
-- python start.py
->What is your name? harsh
->What course is this for? swe
->Starting collaboration!
->You have joined SWE's room. Welcome!
-
-#### Example for ML functions
+### Example for ML functions
 
 Adding ML node (which automatically becomes the server)
-- cd <location of root of repo>
-- python start.py
->What is your name? ml_node
->What course is this for? swe
->Starting collaboration!
->You have joined SWE's room. Welcome!
+```
+cd <location of root of repo>
+python start.py
+What is your name? ml_node
+What course is this for? swe
+Starting collaboration!
+You have joined SWE's room. Welcome!
+```
 
 Now anyone in the chat can write:
-> [ML] test.png
+```
+[ML] test.png
+```
 After this ml_node will broadcast IMG->TXT data with the help of main chat node to all the nodes
 
-#### Example for saving chat locally for future reference
-> savehistory()
+### Example for saving chat locally for future reference
+```
+savehistory()
+```
 This will save history of the chat for that node in their local dir with date and time
 
 
@@ -80,9 +94,11 @@ Can't use multiprocessing instead of threading in Python because : https://stack
 - (IMP) Facilitator bug -> everyone tries to become the server
 - ML node can't be facilatator
 
-# Basic High Level Design Implementation
+### Diagrams
+
+#### Basic High Level Design Implementation
 ![High Level](Diagram/HighLevelDesign.PNG)
 
-# Use Case Implementation
+#### Use Case Implementation
 ![Use Case](Diagram/BasicUseCase.PNG)
 
