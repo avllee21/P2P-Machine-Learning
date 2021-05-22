@@ -111,4 +111,4 @@ ___
 - Add authentication - professor to the [PROF announcement] [Lecture upload]
 
 #### Kanban Board
-![alt text](https://github.com/gskishan004/P2P-Machine-Learning/blob/main/Diagram/kanban.JPG)
+![alt text](https://github.com/gskishan004/P2P-Machine-Learning/blob/main/kanban_board.JPG)
