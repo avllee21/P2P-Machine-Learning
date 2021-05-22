@@ -1,7 +1,7 @@
 import sys
 import time
 from chat_node import ChatNode
-from client import Client, P2P
+from peer_node import PeerNode, P2P
 from random import randint
 
 class Note:
@@ -32,7 +32,7 @@ class User:
                     peer = '127.0.0.1'
                     #print(P2P.peers, str(list(P2P.peer_with_name)))
                     try:
-                        client = Client(self.name, peer, course, self.note)
+                        client = PeerNode(self.name, peer, course, self.note)
 
                     # Exit if end-user interrupts
                     except KeyboardInterrupt:

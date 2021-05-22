@@ -16,7 +16,7 @@ class Course:
         self.course_name =  course
         self.course_port = course_port
 
-class Client:
+class PeerNode:
     def __init__(self, name, address, course, note):
         self.name = name
         self.note = note
