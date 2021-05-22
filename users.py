@@ -1,3 +1,7 @@
+'''
+Checks if the main chat node is alive, if not it has logic for peers to find next main chat node
+'''
+
 import sys
 import time
 from chat_node import ChatNode

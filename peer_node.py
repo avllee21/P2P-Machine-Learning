@@ -1,3 +1,7 @@
+'''
+Contains functions for nodes to send messages, use ML and to save discussion history
+'''
+
 import socket
 import multiprocessing
 import sys

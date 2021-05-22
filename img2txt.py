@@ -1,3 +1,10 @@
+'''
+Uses Google tesseract to give ML functionalities to the nodes
+'''
+
+
+
+
 from PIL import Image
 import pytesseract
 

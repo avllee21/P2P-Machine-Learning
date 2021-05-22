@@ -1,3 +1,8 @@
+'''
+Main node responsible for broadcasting messages between peers
+Keeps track of all the connected nodes
+'''
+
 import socket
 import time
 import threading

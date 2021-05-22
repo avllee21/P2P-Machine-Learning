@@ -5,6 +5,13 @@ https://github.com/StorjOld/pyp2p/blob/master/pyp2p/sock.py
 https://docs.python.org/3/library/socket.html
 
 '''
+
+'''
+Takes the user input and authenticates it 
+And if successful the nodes can join the room and start collaboration
+
+'''
+
 import sys
 from node_details import nodeDetails 
 from users import User

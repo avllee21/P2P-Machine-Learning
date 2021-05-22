@@ -1,3 +1,9 @@
+'''
+Contains the information regarding the nodes and their roles
+Additionally, they have info regarding the rooms that they are allowed to join
+'''
+
+
 class nodeDetails:
     # Add new users with their roles and corresponding course here
     users_info = {
