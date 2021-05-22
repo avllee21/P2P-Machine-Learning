@@ -4,7 +4,7 @@ import threading
 
 
 
-class Server:
+class ChatNode:
 
     def __init__(self, name, course, note):
         self.name = name

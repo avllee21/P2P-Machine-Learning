@@ -1,6 +1,6 @@
 import sys
 import time
-from server import Server
+from chat_node import ChatNode
 from client import Client, P2P
 from random import randint
 from note import Note
@@ -14,9 +14,11 @@ class User:
         self.curr_port = None
 
     def startCollab(self, role, course):
-      
+        client = None
+        chat_node_instance = None
+
         if role == 'student':
-            client = None
+            
             while True:
                 try:
                     print("Starting collaboration!")
@@ -37,10 +39,11 @@ class User:
                     if self.name not in self.ml_node_list:
                         try:
                             if len(P2P.peers)==1:
-                                server = Server(self.name, course, self.note)
+                                chat_node_instance = ChatNode(self.name, course, self.note)
                             
+                            # Finding the next main chat node instance via name - sorted in lexiographic order
                             elif self.name == sorted(P2P.peer_with_name, key = lambda x : x.split("?")[1])[0].split("?")[1]:
-                                server = Server(self.name, course, self.note)
+                                chat_node_instance = ChatNode(self.name, course, self.note)
                         
                         except KeyboardInterrupt:
                             sys.exit(0)
