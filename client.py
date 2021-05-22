@@ -2,10 +2,19 @@ import socket
 import multiprocessing
 import sys
 import time
-from course import Course
-from note import Note
 from datetime import datetime
 from img2txt import img2txt
+#from audioConvert import get_large_audio_transcription
+
+class Note:
+    def __init__(self, course):
+        self.body = ""
+        self.course = course
+
+class Course:
+    def __init__(self, course, course_port):
+        self.course_name =  course
+        self.course_port = course_port
 
 class Client:
     def __init__(self, name, address, course, note):

@@ -3,7 +3,12 @@ import time
 from chat_node import ChatNode
 from client import Client, P2P
 from random import randint
-from note import Note
+
+class Note:
+    def __init__(self, course):
+        self.body = ""
+        self.course = course
+
 
 class User:
     def __init__(self, name, course):

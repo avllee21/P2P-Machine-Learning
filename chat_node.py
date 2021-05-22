@@ -3,9 +3,7 @@ import time
 import threading
 
 
-
 class ChatNode:
-
     def __init__(self, name, course, note):
         self.name = name
         self.course = course
